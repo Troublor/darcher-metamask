@@ -39,6 +39,7 @@ import {
   ENVIRONMENT_TYPE_NOTIFICATION,
   ENVIRONMENT_TYPE_FULLSCREEN,
 } from './lib/enums'
+import {StorageMonitor} from "./storage-monitor";
 /* eslint-enable import/first */
 
 // METAMASK_TEST_CONFIG is used in e2e tests to set the default network to localhost
@@ -466,3 +467,7 @@ extension.runtime.onInstalled.addListener(({ reason }) => {
     platform.openExtensionInBrowser()
   }
 })
+
+// start DArcher dbmonitor
+const monitor = new StorageMonitor('ws://localhost:1235')
+monitor.start()
