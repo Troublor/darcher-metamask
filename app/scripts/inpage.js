@@ -57,6 +57,25 @@ initProvider({
   connectionStream: metamaskStream,
 })
 
+// TODO troublor modify starts: instrument ethereum provider for transaction stack trace
+const {
+  traceSendAsync
+} = require("./trace-instrument.web")
+
+window.ethereum["_rpcRequest"] = new Proxy(window.ethereum["_rpcRequest"], {
+  apply(target, thisArg, argArray) {
+    if (argArray.length >= 2) {
+      const payload = argArray[0];
+      const callback = argArray[1];
+      if (typeof payload === "object" && !Array.isArray(payload)) {
+        argArray[1] = traceSendAsync(payload.method, payload.params, callback);
+      }
+    }
+    target.apply(thisArg, argArray);
+  }
+})
+// troublor modify ends
+
 // TODO:deprecate:2020
 // Setup web3
 
