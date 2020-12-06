@@ -61,6 +61,9 @@ export class StorageMonitor {
 
   onWsClosed() {
     this.logger.info("Websocket connection with DArcher disconnected")
+    setTimeout(() => {
+      this.start();
+    }, 1000);
   }
 
   onWsError(e) {
