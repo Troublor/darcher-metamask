@@ -491,11 +491,11 @@ async function openPopup () {
 }
 
 // On first install, open a new tab with MetaMask
-extension.runtime.onInstalled.addListener(({ reason }) => {
-  if (reason === 'install' && !(process.env.METAMASK_DEBUG || process.env.IN_TEST)) {
-    platform.openExtensionInBrowser()
-  }
-})
+// extension.runtime.onInstalled.addListener(({ reason }) => {
+//   if (reason === 'install' && !(process.env.METAMASK_DEBUG || process.env.IN_TEST)) {
+//     platform.openExtensionInBrowser()
+//   }
+// })
 
 // start DArcher dbmonitor
 // const monitor = new StorageMonitor('ws://localhost:1235')
